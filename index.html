@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101d39">
+  <meta name="description" content="Bài kiểm tra Điện toán đám mây của sinh viên Phạm Văn Tuyền, lớp K9.CT1A, mã sinh viên 23DH201046.">
+  <title>Bài kiểm tra Điện toán đám mây | Phạm Văn Tuyền</title>
+  <style>
+    :root {
+      --navy: #101d39;
+      --ink: #15213b;
+      --muted: #64718a;
+      --blue: #3568ee;
+      --cyan: #63dcd4;
+      --border: #e1e7f1;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; line-height: 1.6; color: var(--ink); background: #f4f7fc; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, calc(100% - 44px)); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 10; color: #fff; background: rgba(15, 27, 53, .96); border-bottom: 1px solid rgba(255,255,255,.1); backdrop-filter: blur(12px); }
+    .nav { min-height: 76px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .logo { display: inline-flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: -.03em; }
+    .logo-mark { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; background: linear-gradient(135deg,#6ae1d5,#457efa); color: #0c2343; font-size: 23px; }
+    .nav-action { padding: 10px 17px; border-radius: 100px; background: #fff; color: var(--navy); font-size: .9rem; font-weight: 800; }
+    .nav-action:hover { background: #dffbf8; }
+    .hero { color: white; position: relative; overflow: hidden; background: radial-gradient(circle at 80% 15%,#274f7b,transparent 40%),linear-gradient(125deg,#101d39,#162a4d); }
+    .hero::before, .hero::after { content: ""; position: absolute; border: 1px solid rgba(147,192,242,.1); border-radius: 50%; pointer-events: none; }
+    .hero::before { width: 680px; height: 680px; right: -210px; top: -320px; }
+    .hero::after { width: 940px; height: 940px; right: -340px; top: -450px; }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr .9fr; gap: 65px; align-items: center; padding: 104px 0 110px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; text-transform: uppercase; font-size: .74rem; font-weight: 800; letter-spacing: .17em; color: var(--cyan); }
+    .eyebrow::before { content: ""; width: 23px; height: 2px; background: currentColor; }
+    h1 { margin: 20px 0; font-size: clamp(3.1rem,6vw,5.3rem); line-height: 1.08; letter-spacing: -.07em; font-weight: 850; }
+    h1 span { color: var(--cyan); }
+    .hero-description { margin: 0 0 34px; max-width: 510px; color: #c3d2e9; font-size: 1.08rem; }
+    .button { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; background: var(--cyan); color: #102644; font-weight: 800; border-radius: 12px; box-shadow: 0 10px 30px rgba(61,224,203,.16); }
+    .button:hover { transform: translateY(-2px); }
+    .terminal { border-radius: 21px; overflow: hidden; border: 1px solid rgba(195,221,255,.22); background: #0b162c; box-shadow: 0 32px 100px rgba(3,10,25,.35); transform: rotate(1.3deg); }
+    .terminal-top { height: 47px; display: flex; gap: 7px; align-items: center; padding: 0 19px; border-bottom: 1px solid rgba(255,255,255,.09); color: #a6bbd6; font-size: .73rem; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #ef7776; }
+    .dot:nth-child(2) { background: #eec66d; }
+    .dot:nth-child(3) { background: #6bd3ab; }
+    .terminal-label { margin-left: auto; }
+    .terminal-body { padding: 27px 25px 33px; font-family: Consolas,"Courier New",monospace; color: #d5e4f9; font-size: .89rem; line-height: 2.2; }
+    .terminal-comment { color: #7791b4; }
+    .terminal-prompt { color: var(--cyan); }
+    .terminal-success { color: #80ecc4; }
+    .terminal-box { margin-top: 19px; padding: 18px; border-radius: 12px; background: rgba(66,109,165,.13); border: 1px solid rgba(143,187,241,.16); }
+    .terminal-box small { display: block; color: #92adce; letter-spacing: .11em; text-transform: uppercase; }
+    .terminal-box strong { display: block; color: white; font-family: "Segoe UI",Arial,sans-serif; font-size: 1.15rem; letter-spacing: -.02em; }
+    .feature-strip { border-top: 1px solid rgba(255,255,255,.1); position: relative; z-index: 1; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3,1fr); }
+    .feature { display: flex; align-items: center; gap: 14px; padding: 22px 0; color: #c4d2e8; }
+    .feature:not(:first-child) { padding-left: 24px; }
+    .feature:not(:last-child) { border-right: 1px solid rgba(255,255,255,.1); }
+    .feature-icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; background: rgba(102,222,211,.1); color: var(--cyan); font-size: 1.25rem; }
+    .feature strong { color: #fff; display: block; }
+    .feature small { display: block; color: #afc4dd; font-size: .8rem; }
+    .profile { padding: 92px 0 104px; scroll-margin-top: 80px; }
+    .profile-heading { margin-bottom: 30px; }
+    .profile-heading .eyebrow { color: var(--blue); }
+    h2 { font-size: clamp(2rem,3.6vw,2.65rem); letter-spacing: -.05em; line-height: 1.2; margin: 12px 0; }
+    .profile-heading p { color: var(--muted); margin: 0; }
+    .identity-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .identity-card { background: white; border: 1px solid var(--border); border-radius: 18px; padding: 28px; box-shadow: 0 24px 70px rgba(24,47,94,.08); }
+    .identity-card:nth-child(1) { border-top: 4px solid var(--blue); }
+    .identity-card:nth-child(2) { border-top: 4px solid var(--cyan); }
+    .identity-card:nth-child(3) { border-top: 4px solid #a499fb; }
+    .identity-card p { margin: 0 0 13px; font-size: .78rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 800; color: var(--muted); }
+    .identity-card strong { font-size: clamp(1.08rem,2vw,1.5rem); letter-spacing: -.035em; overflow-wrap: anywhere; }
+    .footer { background: var(--navy); color: #abbbd6; padding: 34px 0; }
+    .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px; font-size: .85rem; }
+    .footer strong { color: #fff; }
+    :focus-visible { outline: 3px solid #62d9ce; outline-offset: 3px; }
+    @media (max-width: 880px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 45px; padding: 70px 0; }
+      .terminal { max-width: 580px; transform: none; }
+      .feature:not(:first-child) { padding-left: 15px; }
+    }
+    @media (max-width: 650px) {
+      .container { width: calc(100% - 28px); }
+      .nav { min-height: 68px; }
+      .logo { font-size: .9rem; }
+      .nav-action { padding: 9px 12px; font-size: .8rem; }
+      .hero-grid { padding: 62px 0; }
+      h1 { font-size: clamp(2.85rem,12vw,4.2rem); }
+      .terminal-body { padding: 22px 18px 25px; font-size: .76rem; }
+      .feature-grid { grid-template-columns: 1fr; padding: 8px 0; }
+      .feature, .feature:not(:first-child) { padding: 12px 0; border: 0; }
+      .profile { padding: 62px 0; }
+      .identity-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="logo" href="#trang-chu" aria-label="Về đầu trang"><span class="logo-mark" aria-hidden="true">☁</span><span>CLOUD LAB <span style="color:#72e6d7">/</span> K9.CT1A</span></a>
+      <a class="nav-action" href="#sinh-vien">Thông tin sinh viên ↗</a>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="trang-chu">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Bài kiểm tra môn học</div>
+          <h1>ĐIỆN TOÁN<br><span>ĐÁM MÂY.</span></h1>
+          <p class="hero-description">Website giới thiệu bài kiểm tra môn Điện toán đám mây, được xây dựng dưới dạng trang web tĩnh và có thể triển khai trên máy chủ Ubuntu sử dụng Nginx.</p>
+          <a class="button" href="#sinh-vien">Xem thông tin sinh viên <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="terminal" aria-label="Minh họa máy chủ web tĩnh Nginx">
+          <div class="terminal-top"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span class="terminal-label">ubuntu@web-server — nginx</span></div>
+          <div class="terminal-body">
+            <div class="terminal-comment"># Triển khai trang web tĩnh</div>
+            <div><span class="terminal-prompt">$</span> sudo nginx -t</div>
+            <div><span class="terminal-success">nginx: configuration test is successful</span></div>
+            <div><span class="terminal-prompt">$</span> curl http://localhost</div>
+            <div class="terminal-comment">&lt;!DOCTYPE html&gt; ...</div>
+            <div class="terminal-box"><small>Đề tài môn học</small><strong>Cloud Computing · Ubuntu · Nginx</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="feature-strip"><div class="container feature-grid">
+        <div class="feature"><span class="feature-icon" aria-hidden="true">◈</span><div><strong>Website tĩnh</strong><small>HTML và CSS thuần</small></div></div>
+        <div class="feature"><span class="feature-icon" aria-hidden="true">⌘</span><div><strong>Ubuntu + Nginx</strong><small>Phục vụ trang web qua HTTP</small></div></div>
+        <div class="feature"><span class="feature-icon" aria-hidden="true">◇</span><div><strong>Không cần backend</strong><small>Chạy trực tiếp từ index.html</small></div></div>
+      </div></div>
+    </section>
+    <section class="profile" id="sinh-vien">
+      <div class="container">
+        <div class="profile-heading">
+          <div class="eyebrow">Hồ sơ bài làm</div>
+          <h2>Thông tin sinh viên</h2>
+          <p>Thông tin người thực hiện bài kiểm tra môn Điện toán đám mây.</p>
+        </div>
+        <div class="identity-grid">
+          <div class="identity-card"><p>Họ và tên</p><strong>Phạm Văn Tuyền</strong></div>
+          <div class="identity-card"><p>Lớp</p><strong>K9.CT1A</strong></div>
+          <div class="identity-card"><p>Mã sinh viên</p><strong>23DH201046</strong></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><div class="container footer-content"><div><strong>ĐIỆN TOÁN ĐÁM MÂY</strong> · Bài kiểm tra môn học</div><div>Phạm Văn Tuyền · K9.CT1A · 23DH201046</div></div></footer>
+</body>
+</html>
